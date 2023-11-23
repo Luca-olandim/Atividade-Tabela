@@ -1,22 +1,22 @@
 // Declarando variáveis globais
-let clientes = [];
+let alunos = [];
 
 // Evento disparado quando o DOM é carregado
 document.addEventListener("DOMContentLoaded", function () {
     // Função para carregar dados na tabela
     carrega();
 
-    // Elementos do modal novo cliente
+    // Elementos do modal novo aluno
     let btnNovoAluno = document.getElementById("btnNovoAluno");
     let modalNovoAluno = document.getElementById("modalNovoAluno");
-    let spanNovoCliente = modalNovoAluno.querySelector(".close");
+    let spanNovoAluno = modalNovoAluno.querySelector(".close");
 
-    // Configurando eventos do modal novo cliente
-    btnNovoCliente.onclick = function () {
+    // Configurando eventos do modal novo aluno
+    btnNovoAluno.onclick = function () {
         modalNovoAluno.style.display = "block";
     };
 
-    spanNovoCliente.onclick = function () {
+    spanNovoAluno.onclick = function () {
         modalNovoAluno.style.display = "none";
     };
 
@@ -35,19 +35,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Função para identificar cliente por placa
-function identifica(placa) {
-    for (let cliente of clientes) {
-        if (cliente.placa === placa.id) {
-            return cliente;
+// Função para identificar aluno por matricula
+function identifica(matricula) {
+    for (let aluno of alunos) {
+        if (aluno.matricula === matricula.id) {
+            return aluno;
         }
     }
     return null;
 }
 
-// Função para exibir modal de informações do cliente
+// Função para exibir modal de informações do aluno
 function modal(button) {
-    let cliente = identifica(button);
+    let aluno = identifica(button);
 
     let modal = document.getElementById("myModal");
 
@@ -62,31 +62,31 @@ function modal(button) {
         return;
     }
 
-    // Elementos do modal de informações do cliente
-    let placaModal = modal.querySelector("#placaModal");
+    // Elementos do modal de informações do aluno
     let nomeModal = modal.querySelector("#nomeModal");
-    let atendimentoModal = modal.querySelector("#atendimentoModal");
-    let conhecimentoModal = modal.querySelector("#conhecimentoModal");
-    let infraestruturaModal = modal.querySelector("#infraestruturaModal");
-    let qualidadeServicoModal = modal.querySelector("#qualidadeServicoModal");
-    let btnExcluirCliente = modal.querySelector("#btnExcluirCliente");
+    let generoModal = modal.querySelector("#generoModal");
+    let datadenascimentoModal = modal.querySelector("#datadenascimentoModal");
+    let turmaModal = modal.querySelector("#turmaModal");
+    let matriculaModal = modal.querySelector("#matriculaModal");
+    let itinerarioModal = modal.querySelector("#itinerarioModal");
+    let btnExcluiraluno = modal.querySelector("#btnExcluiraluno");
 
-    if (!placaModal || !nomeModal || !atendimentoModal || !conhecimentoModal || !infraestruturaModal || !qualidadeServicoModal || !btnExcluirCliente) {
+    if (!nomeModal || !generoModal || !datadenascimentoModal || !turmaModal || !matriculaModal || !itinerarioModal || !btnExcluiraluno) {
         console.error("Elementos não encontrados no DOM");
         return;
     }
 
     // Preenchendo informações no modal
-    placaModal.innerHTML = cliente.placa;
-    nomeModal.innerHTML = cliente.nome;
-    atendimentoModal.innerHTML = cliente.atendimento;
-    conhecimentoModal.innerHTML = cliente.conhecimento;
-    infraestruturaModal.innerHTML = cliente.infraestrutura;
-    qualidadeServicoModal.innerHTML = cliente.qualidadeServico;
+    nomeModal.innerHTML = aluno.nome;
+    generoModal.innerHTML = aluno.genero;
+    datadenascimentoModal.innerHTML = aluno.datadenascimentoModal;
+    turmaModal.innerHTML = aluno.turma;
+    matriculaModal.innerHTML = aluno.matricula;
+    itinerarioModal.innerHTML = aluno.itinenario;
 
     // Configurando o botão de excluir
-    btnExcluirCliente.onclick = function () {
-        excluirCliente(cliente.placa);
+    btnExcluiraluno.onclick = function () {
+        excluiraluno(aluno.matricula);
         modal.style.display = "none";
     };
 
@@ -103,29 +103,29 @@ function modal(button) {
     modal.style.display = "block";
 }
 
-// Função para excluir cliente
-function excluirCliente(placa) {
-    clientes = clientes.filter(cliente => cliente.placa !== placa);
-    localStorage.setItem("clientes", JSON.stringify(clientes));
+// Função para excluir aluno
+function excluiraluno(matricula) {
+    alunos = alunos.filter(aluno => aluno.matricula !== matricula);
+    localStorage.setItem("alunos", JSON.stringify(alunos));
     carrega();
 }
 
 // Função para carregar dados na tabela
 function carrega() {
     let tabela = document.getElementById("alunos");
-    clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+    alunos = JSON.parse(localStorage.getItem("alunos")) || [];
 
     tabela.innerHTML = "";
 
-    for (let cliente of clientes) {
-        let botaoid = `<td><button id='${cliente.placa}' class='btn-info'>Mais info</button></td>`;
+    for (let aluno of alunos) {
+        let botaoid = `<td><button id='${aluno.matricula}' class='btn-info'>Mais info</button></td>`;
         let linha = `<tr>
-            <td>${cliente.placa}</td>
-            <td>${cliente.nome}</td>
-            <td>${cliente.atendimento}</td>
-            <td>${cliente.conhecimento}</td>
-            <td>${cliente.infraestrutura}</td>
-            <td>${cliente.qualidadeServico}</td>            
+            <td>${aluno.nome}</td>
+            <td>${aluno.genero}</td>
+            <td>${aluno.datadenascimentoModal}</td>
+            <td>${aluno.turma}</td>
+            <td>${aluno.matricula}</td>
+            <td>${aluno.itinenario}</td>            
             ${botaoid}</tr>`;
         tabela.innerHTML += linha;
     }
@@ -139,44 +139,44 @@ function carrega() {
     }
 }
 
-// Função para cadastrar novo cliente
+// Função para cadastrar novo aluno
 function cadastrarAluno() {
-    let placa = document.getElementById("placa").value;
     let nome = document.getElementById("nome").value;
-    let atendimento = document.getElementById("atendimento").value;
-    let conhecimento = document.getElementById("conhecimento").value;
-    let infraestrutura = document.getElementById("infraestrutura").value;
-    let qualidadeServico = document.getElementById("qualidadeServico").value;
+    let genero = document.getElementById("genero").value;
+    let datadenascimentoModal = document.getElementById("datadenascimento").value;
+    let turma = document.getElementById("turma").value;
+    let matricula = document.getElementById("matricula").value;
+    let itinenario = document.getElementById("itinenario").value;
 
-    // Verifica se a placa já está cadastrada
-    if (clienteExistente(placa)) {
-        alert("Placa já cadastrada. Insira uma placa única.");
+    // Verifica se a matricula já está cadastrada
+    if (alunoExistente(matricula)) {
+        alert("Placa já cadastrada. Insira uma matricula única.");
         return;
     }
 
-    let novoCliente = {
-        placa: placa,
+    let NovoAluno = {
         nome: nome,
-        atendimento: atendimento,
-        conhecimento: conhecimento,
-        infraestrutura: infraestrutura,
-        qualidadeServico: qualidadeServico
+        genero: genero,
+        datadenascimento: datadenascimento,
+        turma: turma,
+        matricula: matricula,
+        itinenario: itinenario
     };
 
-    clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-    clientes.push(novoCliente);
+    alunos = JSON.parse(localStorage.getItem("alunos")) || [];
+    alunos.push(NovoAluno);
 
     // Salva no localStorage
-    localStorage.setItem("clientes", JSON.stringify(clientes));
+    localStorage.setItem("alunos", JSON.stringify(alunos));
 
-    // Recarrega a tabela após cadastrar um novo cliente
+    // Recarrega a tabela após cadastrar um novo aluno
     carrega();
 
-    // Esconde o modal de novo cliente
+    // Esconde o modal de novo aluno
     modalNovoAluno.style.display = "none";
 }
 
-// Função para verificar se o cliente já existe
-function clienteExistente(placa) {
-    return clientes.some(cliente => cliente.placa === placa);
+// Função para verificar se o aluno já existe
+function alunoExistente(matricula) {
+    return alunos.some(aluno => aluno.matricula === matricula);
 }
