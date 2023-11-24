@@ -79,10 +79,10 @@ function modal(button) {
     // Preenchendo informações no modal
     nomeModal.innerHTML = aluno.nome;
     generoModal.innerHTML = aluno.genero;
-    datadenascimentoModal.innerHTML = aluno.datadenascimentoModal;
+    datadenascimentoModal.innerHTML = aluno.datadenascimento;
     turmaModal.innerHTML = aluno.turma;
     matriculaModal.innerHTML = aluno.matricula;
-    itinerarioModal.innerHTML = aluno.itinenario;
+    itinerarioModal.innerHTML = aluno.itinerario;
 
     // Configurando o botão de excluir
     btnExcluiraluno.onclick = function () {
@@ -122,10 +122,10 @@ function carrega() {
         let linha = `<tr>
             <td>${aluno.nome}</td>
             <td>${aluno.genero}</td>
-            <td>${aluno.datadenascimentoModal}</td>
+            <td>${aluno.datadenascimento}</td>
             <td>${aluno.turma}</td>
             <td>${aluno.matricula}</td>
-            <td>${aluno.itinenario}</td>            
+            <td>${aluno.itinerario}</td>            
             ${botaoid}</tr>`;
         tabela.innerHTML += linha;
     }
@@ -143,10 +143,10 @@ function carrega() {
 function cadastrarAluno() {
     let nome = document.getElementById("nome").value;
     let genero = document.getElementById("genero").value;
-    let datadenascimentoModal = document.getElementById("datadenascimento").value;
+    let datadenascimento= document.getElementById("datadenascimento").value;
     let turma = document.getElementById("turma").value;
     let matricula = document.getElementById("matricula").value;
-    let itinenario = document.getElementById("itinenario").value;
+    let itinerario = document.getElementById("itinerario").value;
 
     // Verifica se a matricula já está cadastrada
     if (alunoExistente(matricula)) {
@@ -160,7 +160,7 @@ function cadastrarAluno() {
         datadenascimento: datadenascimento,
         turma: turma,
         matricula: matricula,
-        itinenario: itinenario
+        itinerario: itinerario
     };
 
     alunos = JSON.parse(localStorage.getItem("alunos")) || [];
