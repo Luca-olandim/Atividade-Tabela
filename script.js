@@ -150,7 +150,7 @@ function cadastrarAluno() {
 
     // Verifica se a matricula já está cadastrada
     if (alunoExistente(matricula)) {
-        alert("Placa já cadastrada. Insira uma matricula única.");
+        alert("Aluno já cadastrado. Insira uma matricula única.");
         return;
     }
 
